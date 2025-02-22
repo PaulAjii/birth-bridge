@@ -10,7 +10,8 @@
 		"preview": "vite preview",
 		"db": "npx json-server --watch ./src/db/db.json",
 		"start": "ts-node-esm --project tsconfig.server.json server.ts",
-		"dev:server": "nodemon --project tsconfig.server.json server.ts"
+		"dev:server": "nodemon --project tsconfig.server.json server.ts",
+"post-build": "mkdir -p ./src/db/db.json && npx json-server --watch ./src/db/db.json"
 	},
 	"dependencies": {
 		"@kalimahapps/vue-icons": "^1.7.1",
