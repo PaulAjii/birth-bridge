@@ -250,7 +250,7 @@
 		locationCompleted.value = true;
 	};
 
-	const handleComplete = async () => {
+	const handleComplete = () => {
 		const data = {
 			_id: uuidv4(),
 			state: locationData.value.state,
@@ -262,7 +262,7 @@
 			email_address: formData.value.hospitalData.email_address,
 			password: formData.value.security.password,
 		};
-		await registerHospital(data);
+		registerHospital(data);
 		router.push('/login');
 	};
 </script>
