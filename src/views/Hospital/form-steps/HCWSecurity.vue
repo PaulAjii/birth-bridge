@@ -73,7 +73,7 @@
 	import { ref, computed, watch } from 'vue';
 	import FormHead from '../components/FormHead.vue';
 	import FormError from '../../../components/FormError.vue';
-	import { HCWSecurityData } from '../../../types/healthcareworkers';
+	import type { HCWSecurityData } from '../../../types/healthcareworkers';
 
 	const props = defineProps<{
 		modelValue: HCWSecurityData;

@@ -16,7 +16,7 @@
 						type="text"
 						name="hospitalName"
 						id="hospitalName"
-						class="w-full outline-none p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
+						class="w-full outline-none p-4 bg-neutral-200 text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
 						:class="{
 							'border-primary border-2 border-solid':
 								getFieldError('hospitalName'),
@@ -33,7 +33,7 @@
 						>What tier of HealthCare center is it?</label
 					>
 					<select
-						class="w-full outline-none p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
+						class="w-full p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
 						:class="{
 							'border-primary border-2 border-solid':
 								getFieldError('tier'),
@@ -67,7 +67,7 @@
 						type="text"
 						name="address"
 						id="address"
-						class="w-full outline-none p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
+						class="w-full p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
 						:class="{
 							'border-primary border-2 border-solid':
 								getFieldError('address'),
@@ -92,7 +92,7 @@
 							type="text"
 							name="phone_number"
 							id="phone"
-							class="w-full outline-none p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
+							class="w-full p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
 							:class="{
 								'border-primary border-2 border-solid':
 									getFieldError('phone_number'),
@@ -116,7 +116,7 @@
 							type="email"
 							name="email_address"
 							id="email"
-							class="w-full outline-none p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
+							class="w-full p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
 							:class="{
 								'border-primary border-2 border-solid':
 									getFieldError('email_address'),
@@ -147,7 +147,7 @@
 <script setup lang="ts">
 	import { ref, watch, computed } from 'vue';
 	import FormHead from '../components/FormHead.vue';
-	import { HospitalFormData } from '../../../types/hospital';
+	import type { HospitalFormData } from '../../../types/hospital';
 	import FormError from '../../../components/FormError.vue';
 
 	const props = defineProps<{

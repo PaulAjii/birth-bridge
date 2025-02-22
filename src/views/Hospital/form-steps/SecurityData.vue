@@ -17,7 +17,7 @@
 						type="password"
 						name="password"
 						id="password"
-						class="w-full flex flex-col gap-4 outline-none p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
+						class="w-full flex flex-col gap-4 p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
 						:class="{
 							'border-primary border-2 border-solid':
 								passwordError,
@@ -41,7 +41,7 @@
 						type="password"
 						name="confirm_password"
 						id="cpassword"
-						class="w-full flex flex-col gap-4 outline-none p-4 bg-neutral-200 outline-none text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
+						class="w-full flex flex-col gap-4 outline-none p-4 bg-neutral-200 text-neutral-500 border border-solid border-neutral-400 rounded-lg overflow-hidden"
 						placeholder="Re-enter password"
 						:class="{
 							'border-primary border-2 border-solid':
@@ -72,7 +72,7 @@
 <script setup lang="ts">
 	import { ref, computed, watch } from 'vue';
 	import FormHead from '../components/FormHead.vue';
-	import { SecurityFormData } from '../../../types/hospital';
+	import type { SecurityFormData } from '../../../types/hospital';
 	import FormError from '../../../components/FormError.vue';
 
 	const props = defineProps<{

@@ -153,7 +153,7 @@
 <script setup lang="ts">
 	import { ref, computed, watch } from 'vue';
 	import FormHead from '../components/FormHead.vue';
-	import { HealthCareWorkers } from '../../../types/healthcareworkers';
+	import type { HealthCareWorkers } from '../../../types/healthcareworkers';
 	import FormError from '../../../components/FormError.vue';
 
 	const props = defineProps<{
