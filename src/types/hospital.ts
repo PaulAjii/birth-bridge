@@ -34,7 +34,7 @@ export interface HospitalRegistrationData {
 }
 
 export interface Hospital {
-	_id: string;
+	id: string;
 	state: string;
 	lga: string;
 	hospitalName: string;

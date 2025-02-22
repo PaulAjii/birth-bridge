@@ -84,13 +84,13 @@
 	const handleComplete = async (): Promise<void> => {
 		const currentHospital = hospitalStore.getCurrentHospital;
 
-		if (!currentHospital?._id) {
+		if (!currentHospital?.id) {
 			return;
 		}
 
 		const data = {
-			_id: uuidv4(),
-			hospitalID: currentHospital._id,
+			id: uuidv4(),
+			hospitalID: currentHospital.id,
 			name: formData.value.hcwData.name,
 			category: formData.value.hcwData.category,
 			license_number: formData.value.hcwData.license_number,

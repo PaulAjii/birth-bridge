@@ -4,6 +4,7 @@
 
 		<div class="flex h-full pt-[64px]">
 			<SideBar />
+			<!-- <HCWSidebar v-else /> -->
 
 			<div class="w-full px-[40px] pt-[30px] bg-neutral-100">
 				<div class="flex gap-6 items-center w-full mb-6">
@@ -28,6 +29,7 @@
 					type="button"
 					class="flex gap-2 items-center bg-primary px-4 py-3 rounded-xl text-neutral font-medium text-sm mb-10 cursor-pointer"
 					@click="handleClick"
+					v-if="currentHospital"
 				>
 					<ClAddPlus class="text-base" />
 					<span>Add Healthcare Worker</span>
@@ -123,13 +125,12 @@
 	const hcwStore = useHealthCareWorkers();
 	const hospitalStore = useHospitalStore();
 
+	const currentHospital = hospitalStore.getCurrentHospital;
 	const getRegisteredHCW = (): number => {
-		const currentHospital = hospitalStore.getCurrentHospital;
-
-		if (currentHospital?._id) {
+		if (currentHospital?.id) {
 			const hcws = hcwStore.getHCWS;
 			const registeredHCW = hcws.filter(
-				(h) => h.hospitalID === currentHospital._id
+				(h) => h.hospitalID === currentHospital.id
 			);
 
 			return registeredHCW.length;

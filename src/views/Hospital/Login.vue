@@ -86,6 +86,8 @@
 	import router from '../../router/index';
 	import { useHospitalStore } from '../../store/hospital';
 	import { useHealthCareWorkers } from '../../store/healthcareworkers';
+	import { getHospital } from '../../services/healthcareworkers';
+	import { getAllHospitals } from '../../services/hospital';
 
 	const userData = ref<UserAuth>({
 		email: '',
@@ -156,6 +158,8 @@
 					router.push('/dashboard');
 				} else if (hcwStore.getCurrentHCW) {
 					router.push('/dashboard');
+					await getAllHospitals();
+					await getHospital(hcwStore.getCurrentHCW.id);
 				} else console.error('Invalid credentials');
 			}
 		} catch (error) {

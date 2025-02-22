@@ -19,7 +19,7 @@ export interface HCWData {
 }
 
 export interface Workers {
-	_id: string;
+	id: string;
 	hospitalID: string;
 	name: string;
 	category: string;

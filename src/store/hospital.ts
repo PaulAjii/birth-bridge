@@ -13,6 +13,10 @@ export const useHospitalStore = defineStore('hospital', () => {
 	const getAllHospitals = computed(() => hospitals.value);
 	const getCurrentHospital = computed(() => currentHospital.value);
 
+	const setAllHospitals = (data: Hospital[]) => {
+		hospitals.value = data;
+	};
+
 	// Actions
 	const addHospital = (hospital: Hospital) => {
 		hospitals.value.push(hospital);
@@ -28,6 +32,7 @@ export const useHospitalStore = defineStore('hospital', () => {
 		getAllHospitals,
 		addHospital,
 		getCurrentHospital,
+		setAllHospitals,
 		login,
 	};
 });

@@ -31,3 +31,18 @@ export const registerHospital = async (data: Hospital): Promise<boolean> => {
 		throw error;
 	}
 };
+
+export const getAllHospitals = async (): Promise<void> => {
+	try {
+		const response = await axios.get<Hospital[]>(`${baseURL}/hospitals`);
+
+		store.setAllHospitals(response.data);
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			throw new Error(
+				error.response?.data?.message || 'Failed to register hospital'
+			);
+		}
+		throw error;
+	}
+};

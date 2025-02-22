@@ -12,7 +12,8 @@ dist
 dist-ssr
 *.local
 .env*
-/src/db/db.json
+/src/db/*
+!/src/db/data.json
 
 # Editor directories and files
 .vscode/*

@@ -252,7 +252,7 @@
 
 	const handleComplete = () => {
 		const data = {
-			_id: uuidv4(),
+			id: uuidv4(),
 			state: locationData.value.state,
 			lga: locationData.value.lga,
 			hospitalName: formData.value.hospitalData.hospitalName,
