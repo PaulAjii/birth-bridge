@@ -1,44 +1,40 @@
 import axios from 'axios';
-import type { Hospital } from '../types/hospital';
-import type { Workers } from '../types/healthcareworkers';
 import { useHospitalStore } from '../store/hospital';
-import { useHealthCareWorkers } from '../store/healthcareworkers';
+import type { AuthData, APIResponse } from '../types/userAuth.types'
+
 
 import { API_BASE_URL } from '../config/api';
 
 const baseURL = API_BASE_URL;
 const hospitalStore = useHospitalStore();
-const hcwStore = useHealthCareWorkers();
 
 export const login = async (
-	email: string,
-	password: string
-): Promise<boolean> => {
+	body: AuthData
+): Promise<APIResponse> => {
 	try {
-		const hospitalResponse = await axios.get(`${baseURL}/hospitals`);
-
-		const hospital = hospitalResponse.data.find(
-			(h: Hospital) =>
-				h.email_address === email && h.password === password
-		);
-		if (hospital) {
-			hospitalStore.login(hospital);
-			localStorage.removeItem('currentHCW');
-			return true;
-		}
-
-		const hcwResponse = await axios.get(`${baseURL}/healthcare-workers`);
-		const hcw = hcwResponse.data.find(
-			(h: Workers) => h.email_address === email && h.password === password
+		const response = await axios.post(`${baseURL}/hospital/sign-in`, 
+			body,
+			{
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+				},
+			}
 		);
 
-		if (hcw) {
-			hcwStore.login(hcw);
-			localStorage.removeItem('currentHospital');
-			return true;
+		const jsonData: APIResponse = await response.data
+		if (!jsonData.data) {
+			return ({
+				status: "error",
+				message: "No data received"
+			})
 		}
 
-		return false;
+		hospitalStore.login(jsonData.data)
+
+		console.log(jsonData)
+
+		return jsonData;
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			throw new Error(error.response?.data?.message || 'Login failed');

@@ -127,7 +127,6 @@
 	import SecurityData from './form-steps/SecurityData.vue';
 	import ProgressBar from './components/ProgressBar.vue';
 	import { registerHospital } from '../../services/hospital';
-	import { v4 as uuidv4 } from 'uuid';
 	import router from '../../router/index';
 
 	const locationCompleted = ref(false);
@@ -250,19 +249,20 @@
 		locationCompleted.value = true;
 	};
 
-	const handleComplete = () => {
+	const handleComplete = async () => {
 		const data = {
-			id: uuidv4(),
 			state: locationData.value.state,
 			lga: locationData.value.lga,
-			hospitalName: formData.value.hospitalData.hospitalName,
+			name: formData.value.hospitalData.hospitalName,
 			tier: formData.value.hospitalData.tier,
 			address: formData.value.hospitalData.address,
-			phone_number: formData.value.hospitalData.phone_number,
-			email_address: formData.value.hospitalData.email_address,
+			phoneNumber: formData.value.hospitalData.phone_number,
+			email: formData.value.hospitalData.email_address,
 			password: formData.value.security.password,
 		};
-		registerHospital(data);
-		router.push('/login');
+		if (await registerHospital(data)) {
+			router.push('/login');
+		}
+		
 	};
 </script>

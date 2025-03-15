@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import type { Hospital } from '../types/hospital';
+import type {ResponseData} from "../types/userAuth.types"
 
 export const useHospitalStore = defineStore('hospital', () => {
 	const hospitals = ref<Hospital[]>([]);
-	const currentHospital = ref<Hospital | null>(
+	const currentHospital = ref<ResponseData | null>(
 		JSON.parse(localStorage.getItem('currentHospital') || 'null')
 	);
 	// const isAuthenticated = ref(false)
@@ -22,7 +23,7 @@ export const useHospitalStore = defineStore('hospital', () => {
 		hospitals.value.push(hospital);
 	};
 
-	const login = (data: Hospital) => {
+	const login = (data: ResponseData) => {
 		currentHospital.value = data;
 		localStorage.setItem('currentHospital', JSON.stringify(data));
 	};

@@ -11,7 +11,7 @@ const store = useHospitalStore();
 export const registerHospital = async (data: Hospital): Promise<boolean> => {
 	try {
 		const response = await axios.post<Hospital>(
-			`${baseURL}/hospitals`,
+			`${baseURL}/hospital/sign-up`,
 			data,
 			{
 				headers: {
@@ -20,6 +20,7 @@ export const registerHospital = async (data: Hospital): Promise<boolean> => {
 				},
 			}
 		);
+		if (!response.data) return false;
 		store.addHospital(response.data);
 		return true;
 	} catch (error) {

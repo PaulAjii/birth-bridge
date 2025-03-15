@@ -34,13 +34,12 @@ export interface HospitalRegistrationData {
 }
 
 export interface Hospital {
-	id: string;
+	name: string;
 	state: string;
 	lga: string;
-	hospitalName: string;
 	tier: string;
 	address: string;
-	phone_number: string;
-	email_address: string;
+	phoneNumber: string;
+	email: string;
 	password: string;
 }

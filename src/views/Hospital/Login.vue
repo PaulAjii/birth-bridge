@@ -81,15 +81,12 @@
 	import OnboardingBg from './components/OnboardingBg.vue';
 	import FormHead from '../Hospital/components/FormHead.vue';
 	import FormError from '../../components/FormError.vue';
-	import type { UserAuth } from '../../types/userAuth.types';
+	import type { AuthData} from '../../types/userAuth.types';
 	import { login } from '../../services/login';
 	import router from '../../router/index';
 	import { useHospitalStore } from '../../store/hospital';
-	import { useHealthCareWorkers } from '../../store/healthcareworkers';
-	import { getHospital } from '../../services/healthcareworkers';
-	import { getAllHospitals } from '../../services/hospital';
 
-	const userData = ref<UserAuth>({
+	const userData = ref<AuthData>({
 		email: '',
 		password: '',
 	});
@@ -145,22 +142,19 @@
 			touchedFields.value.email = true;
 			touchedFields.value.password = true;
 
-			const success = await login(
-				userData.value.email,
-				userData.value.password
-			);
+			const body: AuthData = {
+				email: userData.value.email,
+				password: userData.value.password,
+			}
+
+			const success = await login(body);
 
 			if (success) {
 				const hospitalStore = useHospitalStore();
-				const hcwStore = useHealthCareWorkers();
 
 				if (hospitalStore.getCurrentHospital) {
 					router.push('/dashboard');
-				} else if (hcwStore.getCurrentHCW) {
-					router.push('/dashboard');
-					await getAllHospitals();
-					await getHospital(hcwStore.getCurrentHCW.id);
-				} else console.error('Invalid credentials');
+				}
 			}
 		} catch (error) {
 			throw error;
