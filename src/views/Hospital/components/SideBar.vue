@@ -11,22 +11,22 @@
 			<div class="flex flex-col gap">
 				<p class="text-base font-semibold">
 					{{
-						currentHospital
-							? currentHospital?.hospitalName
+						currentHospital?.hospital
+							? currentHospital?.hospital?.name
 							: 'BirthBridge'
 					}}
 				</p>
 				<p class="text-xs font-medium leading-[20px]">
 					{{
-						currentHospital
-							? currentHospital?.address
+						currentHospital?.hospital
+							? currentHospital?.hospital?.address
 							: 'BirthBridge Address'
 					}}
 				</p>
 			</div>
 		</div>
 
-		<div v-else>
+		<!-- <div v-else>
 			<div
 				class="flex items-center gap-2.5 text-black px-[35px] py-4 border-neutral-200 border-solid border-b"
 			>
@@ -48,7 +48,7 @@
 				<PhBoldBuildingApartment class="text-primary text-3xl" />
 				<div class="flex flex-col gap">
 					<p class="text-base font-semibold">
-						{{ hospital ? hospital?.hospitalName : 'BirthBridge' }}
+						{{ hospital ? hospital?.name : 'BirthBridge' }}
 					</p>
 					<p class="text-xs font-medium leading-[20px]">
 						{{
@@ -57,12 +57,12 @@
 					</p>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="px-[35px] flex flex-col gap-2 h-[450px]">
 			<button
 				type="button"
-				class="flex items-center gap-3 py-3 px-4 bg-primary text-neutral w-full"
+				class="flex items-center gap-3 py-3 px-4 bg-primary text-neutral w-full cursor-pointer"
 			>
 				<AnFilledHome class="text-base" />
 				<span class="text-base font-medium">Home</span>
@@ -70,7 +70,7 @@
 
 			<button
 				type="button"
-				class="flex items-center gap-3 py-3 px-4 text-neutral-400 w-full"
+				class="flex items-center gap-3 py-3 px-4 text-neutral-400 w-full cursor-pointer"
 			>
 				<LiApartment class="text-base" />
 				<span class="text-md font-semibold">Hospital</span>
@@ -108,35 +108,17 @@
 		MdNotifications,
 	} from '@kalimahapps/vue-icons';
 	import { useHospitalStore } from '../../../store/hospital';
-	import { useHealthCareWorkers } from '../../../store/healthcareworkers';
-	import { computed } from 'vue';
+	import { computed, onMounted } from 'vue';
 	import { capitalize } from '../../../utils';
+	import { useRouter } from 'vue-router';
 
-	const store = useHealthCareWorkers();
+	const router = useRouter();
 	const hospitalStore = useHospitalStore();
-	const hospital = store.getHospital;
 	const currentHospital = hospitalStore.getCurrentHospital;
-	const currentHCW = store.getCurrentHCW;
 
-	const nameInitials = computed((): string => {
-		const name = currentHCW?.name;
-
-		if (!name) return 'John Doe';
-
-		return name
-			.split(' ')
-			.map((word) => word.charAt(0).toUpperCase())
-			.join('');
-	});
-
-	const nameDesignated = computed((): string => {
-		const name = currentHCW?.name;
-		const category = currentHCW?.category;
-
-		if (!name) return 'Dr. John Doe';
-
-		const prefix = capitalize(category);
-
-		return `${prefix}. ${name}`;
+	onMounted(() => {
+		if (!currentHospital) {
+			router.push('/login');
+		}
 	});
 </script>

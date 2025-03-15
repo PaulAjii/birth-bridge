@@ -62,7 +62,7 @@
 				</div>
 
 				<button
-					class="w-full bg-primary py-4 px-6 rounded-xl text-neutral"
+					class="w-full bg-primary py-4 px-6 rounded-xl text-neutral cursor-pointer"
 					:class="{
 						hidden: !isFormValid,
 					}"
@@ -81,10 +81,9 @@
 	import OnboardingBg from './components/OnboardingBg.vue';
 	import FormHead from '../Hospital/components/FormHead.vue';
 	import FormError from '../../components/FormError.vue';
-	import type { AuthData} from '../../types/userAuth.types';
+	import type { AuthData } from '../../types/userAuth.types';
 	import { login } from '../../services/login';
 	import router from '../../router/index';
-	import { useHospitalStore } from '../../store/hospital';
 
 	const userData = ref<AuthData>({
 		email: '',
@@ -145,16 +144,12 @@
 			const body: AuthData = {
 				email: userData.value.email,
 				password: userData.value.password,
-			}
+			};
 
 			const success = await login(body);
 
 			if (success) {
-				const hospitalStore = useHospitalStore();
-
-				if (hospitalStore.getCurrentHospital) {
-					router.push('/dashboard');
-				}
+				router.push('/dashboard');
 			}
 		} catch (error) {
 			throw error;
