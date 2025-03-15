@@ -9,9 +9,7 @@
 		"build": "vue-tsc -b && vite build",
 		"preview": "vite preview",
 		"db": "npx json-server --watch ./src/db/data.json",
-		"start": "ts-node-esm --project tsconfig.server.json server.ts",
-		"dev:server": "nodemon --project tsconfig.server.json server.ts",
-		"post-build": "npx json-server --watch ./src/db/data.json"
+		"start": "ts-node-esm --project tsconfig.server.json"
 	},
 	"dependencies": {
 		"@kalimahapps/vue-icons": "^1.7.1",
